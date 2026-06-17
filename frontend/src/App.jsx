@@ -98,6 +98,7 @@ export default function App() {
           txPending={web3.txPending}
           onPayRent={handlePayRent}
           error={web3.error}
+          dataLoaded={web3.dataLoaded}
         />
       )}
 

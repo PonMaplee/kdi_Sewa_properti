@@ -6,7 +6,7 @@
  */
 
 // Alamat kontrak — ganti setelah deploy
-export const CONTRACT_ADDRESS = "0x5FbDB2315678afecb367f032d93F642f64180aa3"; // Default Hardhat deploy address
+export const CONTRACT_ADDRESS = "0x70E426B6b1FFFF5450e5e9F2D1c1E6678D5e0500"; // Deployed on Sepolia
 
 // ABI kontrak (human-readable format Ethers.js v6)
 export const CONTRACT_ABI = [
@@ -52,26 +52,15 @@ export const SUPPORTED_CHAINS = {
     symbol: "ETH",
     blockExplorer: "",
   },
-  137: {
-    name: "Polygon Mainnet",
-    rpcUrl: "https://polygon-rpc.com",
-    symbol: "MATIC",
-    blockExplorer: "https://polygonscan.com",
-  },
-  80001: {
-    name: "Polygon Mumbai",
-    rpcUrl: "https://rpc-mumbai.maticvigil.com",
-    symbol: "MATIC",
-    blockExplorer: "https://mumbai.polygonscan.com",
-  },
-  421614: {
-    name: "Arbitrum Sepolia",
-    rpcUrl: "https://sepolia-rollup.arbitrum.io/rpc",
-    symbol: "ETH",
-    blockExplorer: "https://sepolia.arbiscan.io",
+  11155111: {
+    name: "Sepolia Testnet",
+    rpcUrl: "https://rpc.sepolia.org",
+    symbol: "SepoliaETH",
+    blockExplorer: "https://sepolia.etherscan.io",
   },
 };
 
 // Konfigurasi default
-export const DEFAULT_CHAIN_ID = 31337;
+export const DEFAULT_CHAIN_ID = 11155111;
 export const RENT_AMOUNT_ETH = "0.05";
+

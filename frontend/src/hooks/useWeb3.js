@@ -34,6 +34,7 @@ export function useWeb3() {
   const [tenantList, setTenantList] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [txPending, setTxPending] = useState(false);
+  const [dataLoaded, setDataLoaded] = useState(false);
 
   const contractRef = useRef(null);
 
@@ -108,6 +109,12 @@ export function useWeb3() {
       setCurrentPenalty(penalty);
     } catch (err) {
       console.error('Gagal membaca status sewa:', err);
+      // Reset ke default jika gagal baca (misal akun tidak terdaftar)
+      setTenantDetails(null);
+      setLeaseStatus({ isActive: false, endTime: 0n });
+      setCurrentPenalty(0n);
+    } finally {
+      setDataLoaded(true);
     }
   }, [provider, account]);
 
@@ -383,7 +390,14 @@ export function useWeb3() {
         setSigner(null);
         setProvider(null);
         setIsOwner(false);
+        setDataLoaded(false);
       } else {
+        // Reset semua data tenant sebelum reconnect ke akun baru
+        setTenantDetails(null);
+        setLeaseStatus({ isActive: false, endTime: 0n });
+        setCurrentPenalty(0n);
+        setTenantList([]);
+        setDataLoaded(false);
         setAccount(accounts[0]);
         connectWallet(); // Reconnect
       }
@@ -425,6 +439,7 @@ export function useWeb3() {
     setCurrentPenalty(0n);
     setTenantList([]);
     setError(null);
+    setDataLoaded(false);
   }, []);
 
   return {
@@ -434,6 +449,7 @@ export function useWeb3() {
     account,
     chainId,
     isOwner,
+    dataLoaded,
     isConnecting,
     isLoading,
     txPending,

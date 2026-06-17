@@ -18,6 +18,7 @@ export default function TenantPortal({
   txPending,
   onPayRent,
   error,
+  dataLoaded,
 }) {
   const [showPayModal, setShowPayModal] = useState(false);
   const isRegistered = tenantDetails?.isRegistered || false;
@@ -56,6 +57,26 @@ export default function TenantPortal({
     hidden: { opacity: 0, y: 20 },
     show: { opacity: 1, y: 0 },
   };
+
+  // Loading state — data belum selesai di-fetch dari blockchain
+  if (!dataLoaded) {
+    return (
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        className="max-w-2xl mx-auto mt-12 px-4"
+      >
+        <div className="glass-card p-8 text-center">
+          <svg className="animate-spin w-10 h-10 mx-auto mb-4 text-primary-400" fill="none" viewBox="0 0 24 24">
+            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+          </svg>
+          <h2 className="text-xl font-semibold text-white mb-2">Memuat Data...</h2>
+          <p className="text-surface-400 text-sm">Mengambil data sewa dari blockchain Sepolia</p>
+        </div>
+      </motion.div>
+    );
+  }
 
   if (!isRegistered) {
     return (
